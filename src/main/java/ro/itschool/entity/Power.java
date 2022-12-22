@@ -4,25 +4,23 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.bind.annotation.GetMapping;
 
-@Entity
 @Getter
 @Setter
+@Entity
 @NoArgsConstructor
-public class Weakness {
-
+public class Power {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(unique = true)
     private String name;
 
     private String description;
 
-    private Boolean lethal;
 
-    public Weakness(String name) {
-        this.name = name;
+    public Power(String power) {
+        this.name = power;
     }
 }
