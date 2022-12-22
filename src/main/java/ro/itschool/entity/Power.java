@@ -1,24 +1,26 @@
 package ro.itschool.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Getter
 @Setter
 @Entity
-
+@NoArgsConstructor
 public class Power {
     @Id
-    @GeneratedValue()
-    @GetMapping (ManyToMany)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String name;
+
     private String description;
 
 
+    public Power(String power) {
+        this.name = power;
+    }
 }
