@@ -20,7 +20,6 @@ public class Weakness {
 
     private String description;
 
-    private Boolean lethal;
 
     public Weakness(String name) {
         this.name = name;
