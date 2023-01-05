@@ -6,17 +6,15 @@ import ro.itschool.entity.Superhero;
 import ro.itschool.repository.SuperheroRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/superhero")
-public class SuperheroController {
+public class SuperheroController implements SuperheroControllerDoc{
 
 
     @Autowired
     private SuperheroRepository superheroRepository;
 
-    @GetMapping(value = "/all")
     public List<Superhero> getAllSuperheroes() {
         return superheroRepository.findAll();
     }
