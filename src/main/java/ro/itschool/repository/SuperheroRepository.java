@@ -8,7 +8,7 @@ import java.util.List;
 public interface SuperheroRepository extends JpaRepository<Superhero, Long> {
 
 
-    void findByName(String name);
+    List<Superhero> findByName(String name);
 
-    void findByRealName(String realName);
+    List<Superhero> findByRealName(String realName);
 }

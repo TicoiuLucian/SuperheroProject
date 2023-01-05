@@ -17,38 +17,41 @@ public class SuperheroController {
     private SuperheroRepository superheroRepository;
 
     @GetMapping(value = "/all")
-    private List<Superhero> getAllSuperheroes() {
+    public List<Superhero> getAllSuperheroes() {
         return superheroRepository.findAll();
     }
 
-    @GetMapping(value = "/{id}")
-    public void getSuperHeroById (@PathVariable Long id){
+    @GetMapping(value = "/get-by-id/{id}")
+    public void getSuperHeroById(@PathVariable Long id) {
         superheroRepository.findById(id);
     }
 
     @GetMapping(value = "/name")
-    public void getSuperheroesByName(@RequestParam Superhero superhero){
-        superheroRepository.findByName(superhero.getName());
+    public List<Superhero> getSuperheroesByName(@RequestParam Superhero superhero) {
+        return superheroRepository.findByName(superhero.getName());
     }
 
     @GetMapping(value = "/realname")
-    public void getAllSuperheroesByRealName(@RequestParam Superhero superhero){
-        superheroRepository.findByRealName(superhero.getRealName());
+    public List<Superhero> getAllSuperheroesByRealName(@RequestParam Superhero superhero) {
+        return superheroRepository.findByRealName(superhero.getRealName());
     }
 
     @PostMapping
-    private void saveSuperhero(@RequestBody Superhero superhero) {
+    public void saveSuperhero(@RequestBody Superhero superhero) {
         superheroRepository.save(superhero);
     }
 
-    @DeleteMapping(value = "/{id)")
-    private void deleteSuperhero(@RequestParam long id) {
+    @DeleteMapping(value = "/{id}")
+    public void deleteSuperhero(@RequestParam long id) {
         superheroRepository.deleteById(id);
     }
 
     @PutMapping(value = "/update")
-    private void updateSuperhero(@RequestBody Superhero newSuperhero) {
-        superheroRepository.save(newSuperhero);
+    public void updateSuperhero(@RequestBody Superhero newSuperhero) {
+        if (newSuperhero.getId() != null && superheroRepository.findById(newSuperhero.getId()).isPresent())
+            superheroRepository.save(newSuperhero);
+        else
+            throw new RuntimeException("Superhero not found ! Try again");
     }
 
 }
